@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World, LyricmateActivity!</string>
     <string name="app_name">Lyricmate</string>
+    <string name="no_songs">Ruh roh! It appears you don\'t have any songs on your SD Card! :(</string>
 
 </resources>
