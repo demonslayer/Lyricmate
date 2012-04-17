@@ -5,12 +5,12 @@
     android:orientation="vertical" >
 
     <ListView
-        android:id="@id/android:list"
+        android:id="@android:id/android:list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:drawSelectorOnTop="false" />
     
-    <TextView android:id="@id/android:empty"
+    <TextView android:id="@android:id/android:empty"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:text="@string/no_songs" />

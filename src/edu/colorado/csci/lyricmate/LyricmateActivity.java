@@ -1,6 +1,7 @@
 package edu.colorado.csci.lyricmate;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class LyricmateActivity extends ListActivity {
 
 	public void updateSongList() {
 		File home = new File(MEDIA_PATH);
+		System.out.println("HOME HOME HOME" + home.listFiles());
 		if (home.listFiles(new Mp3Filter()).length > 0) {
 			for (File file : home.listFiles(new Mp3Filter())) {
 				songs.add(file.getName());
@@ -43,13 +45,14 @@ public class LyricmateActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		currentPosition = position;
-		playSong(MEDIA_PATH + songs.get(position));
+		playSong(MEDIA_PATH + "/" + songs.get(position));
 	}
 
 	private void playSong(String songPath) {
 		try {
 			mp.reset();
-			mp.setDataSource(songPath);
+			FileInputStream fis = new FileInputStream(songPath);
+			mp.setDataSource(fis.getFD());
 			mp.prepare();
 			mp.start();
 			
