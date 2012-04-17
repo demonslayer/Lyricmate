@@ -31,7 +31,6 @@ public class LyricmateActivity extends ListActivity {
 
 	public void updateSongList() {
 		File home = new File(MEDIA_PATH);
-		System.out.println("HOME HOME HOME" + home.listFiles());
 		if (home.listFiles(new Mp3Filter()).length > 0) {
 			for (File file : home.listFiles(new Mp3Filter())) {
 				songs.add(file.getName());
