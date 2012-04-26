@@ -49,6 +49,13 @@ public class Song extends Activity implements OnClickListener {
 		} else {
 			textTitle.setText(song);
 		}
+		
+		TextView textArtist = (TextView) findViewById(R.id.artist);
+		if (artist != null) {
+			textArtist.setText(artist);
+		} else {
+			textArtist.setText("");
+		}
 
 		playSong(mediaPath + "/" + song);
 
