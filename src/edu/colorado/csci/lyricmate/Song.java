@@ -20,6 +20,8 @@ public class Song extends Activity implements OnClickListener {
 	private String song;
 	private MediaPlayer player = new MediaPlayer();
 	private boolean paused;
+	private Song that = this;
+	private Intent goBack;
 
 
 	@Override
@@ -30,6 +32,8 @@ public class Song extends Activity implements OnClickListener {
 		position = this.getIntent().getIntExtra("position", 0);
 		mediaPath = this.getIntent().getStringExtra("media_path");
 		song = this.getIntent().getStringExtra("song");
+		
+		goBack = new Intent(that, SongList.class);
 
 		TextView textTitle = (TextView) findViewById(R.id.songName);
 		textTitle.setText(song);
@@ -57,13 +61,13 @@ public class Song extends Activity implements OnClickListener {
 			player.start();
 			paused = false;
 
-			//			player.setOnCompletionListener(new OnCompletionListener() {
-			//				@Override
-			//				public void onCompletion(MediaPlayer mp) {
-			//					playing = false;
-			//					paused = false;
-			//				}
-			//			});
+						player.setOnCompletionListener(new OnCompletionListener() {
+							@Override
+							public void onCompletion(MediaPlayer mp) {
+								paused = false;
+								startActivity(goBack);
+							}
+						});
 
 		} catch (IOException e) {
 			Log.v(getString(R.string.app_name), e.getMessage());
@@ -76,6 +80,7 @@ public class Song extends Activity implements OnClickListener {
 		case R.id.stop:
 			player.stop();
 			paused = false;
+			startActivity(goBack);
 			break;
 		case R.id.play:
 			if (!player.isPlaying() && !paused) {
