@@ -19,7 +19,6 @@ import android.widget.ListView;
 public class SongList extends ListActivity {
     private static final String MEDIA_PATH = new String("/sdcard");
     private List<String> songs = new ArrayList<String>();
-    private MediaPlayer mp = new MediaPlayer();
     private int currentPosition = 0;
     
     @Override
@@ -50,6 +49,5 @@ public class SongList extends ListActivity {
 		i.putExtra("media_path", MEDIA_PATH);
 		i.putExtra("song", song);
 		startActivity(i);
-//		playSong(MEDIA_PATH + "/" + songs.get(position));
 	}
 }

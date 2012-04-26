@@ -12,7 +12,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/play"
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_alignParentLeft="true"
@@ -22,22 +22,22 @@
         android:contentDescription="Play" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/stop"
         android:layout_width="58dp"
         android:layout_height="58dp"
-        android:layout_alignTop="@+id/imageView1"
+        android:layout_alignTop="@+id/play"
         android:layout_marginLeft="23dp"
-        android:layout_toRightOf="@+id/imageView1"
+        android:layout_toRightOf="@+id/play"
         android:src="@drawable/stop_button"
         android:contentDescription="Stop" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/pause"
         android:layout_width="58dp"
         android:layout_height="58dp"
-        android:layout_alignTop="@+id/imageView3"
+        android:layout_alignTop="@+id/stop"
         android:layout_marginLeft="25dp"
-        android:layout_toRightOf="@+id/imageView3"
+        android:layout_toRightOf="@+id/stop"
         android:src="@drawable/pause_button"
         android:contentDescription="Pause" />
 
