@@ -1,10 +1,12 @@
 package edu.colorado.csci.lyricmate;
 
+import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
@@ -32,11 +34,21 @@ public class Song extends Activity implements OnClickListener {
 		position = this.getIntent().getIntExtra("position", 0);
 		mediaPath = this.getIntent().getStringExtra("media_path");
 		song = this.getIntent().getStringExtra("song");
-		
+
 		goBack = new Intent(that, SongList.class);
 
+		MediaMetadataRetriever meta = new MediaMetadataRetriever();
+		meta.setDataSource(mediaPath + "/" + song);
+
+		String title = meta.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+		String artist = meta.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+
 		TextView textTitle = (TextView) findViewById(R.id.songName);
-		textTitle.setText(song);
+		if (title != null) {
+			textTitle.setText(title);
+		} else {
+			textTitle.setText(song);
+		}
 
 		playSong(mediaPath + "/" + song);
 
@@ -61,13 +73,13 @@ public class Song extends Activity implements OnClickListener {
 			player.start();
 			paused = false;
 
-						player.setOnCompletionListener(new OnCompletionListener() {
-							@Override
-							public void onCompletion(MediaPlayer mp) {
-								paused = false;
-								startActivity(goBack);
-							}
-						});
+			player.setOnCompletionListener(new OnCompletionListener() {
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					paused = false;
+					startActivity(goBack);
+				}
+			});
 
 		} catch (IOException e) {
 			Log.v(getString(R.string.app_name), e.getMessage());
