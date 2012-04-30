@@ -24,6 +24,8 @@ public class Song extends Activity implements OnClickListener {
 	private boolean paused;
 	private Song that = this;
 	private Intent goBack;
+	private String title;
+	private String artist;
 
 
 	@Override
@@ -40,8 +42,8 @@ public class Song extends Activity implements OnClickListener {
 		MediaMetadataRetriever meta = new MediaMetadataRetriever();
 		meta.setDataSource(mediaPath + "/" + song);
 
-		String title = meta.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-		String artist = meta.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+		title = meta.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+		artist = meta.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
 
 		TextView textTitle = (TextView) findViewById(R.id.songName);
 		if (title != null) {
@@ -67,6 +69,9 @@ public class Song extends Activity implements OnClickListener {
 
 		View pauseButton = findViewById(R.id.pause);
 		pauseButton.setOnClickListener(this);
+		
+		View lyricButton = findViewById(R.id.lyrics);
+		lyricButton.setOnClickListener(this);
 
 	}
 
@@ -117,6 +122,12 @@ public class Song extends Activity implements OnClickListener {
 				player.pause();
 				paused = true;
 			}
+			break;
+		case R.id.lyrics:
+			Intent lyric = new Intent(this, Lyrics.class);
+			lyric.putExtra("title", title);
+			lyric.putExtra("artist", artist);
+			startActivity(lyric);
 		}
 	}
 
