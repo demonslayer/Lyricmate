@@ -1,5 +1,7 @@
 package edu.colorado.csci.lyricmate;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -20,6 +22,15 @@ public class Lyrics extends Activity {
 		} else {
 			// TODO fix this
 			textTitle.setText("");
+		}
+		
+		String lyrics;
+		try {
+			lyrics = new LyricGetter().getLyrics(title, artist);
+			TextView lyricView = (TextView) findViewById(R.id.lyricView);
+			lyricView.setText(lyrics);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		TextView textArtist = (TextView) findViewById(R.id.artist);

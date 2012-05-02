@@ -4,14 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:id="@+id/ScrollView01"
+        android:layout_width="fill_parent"
+        android:layout_height="300px"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="78dp"
-        android:text="Lyrics Here"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_below="@+id/nextButton"
+        android:layout_marginTop="36dp" >
+
+        <TextView
+            android:id="@+id/lyricView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="78dp"
+            android:text="Lyrics Here"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </ScrollView>
 
     <TextView
         android:id="@+id/songName"
