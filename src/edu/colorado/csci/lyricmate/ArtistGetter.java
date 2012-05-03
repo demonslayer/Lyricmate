@@ -11,6 +11,7 @@ public class ArtistGetter {
 
 	public String getBio(String artist) throws IOException {
 
+		String fullArtist = artist;
 		artist = artist.replaceAll(" ", "_");
 		artist = artist.replaceAll("\'", "");
 
@@ -28,8 +29,8 @@ public class ArtistGetter {
 		} catch (FileNotFoundException e) {
 			url = new URL("http://en.wikipedia.org/wiki/"+ artist);
 			try {
-			reader = new BufferedReader(
-					new InputStreamReader(url.openStream()));
+				reader = new BufferedReader(
+						new InputStreamReader(url.openStream()));
 			} catch (FileNotFoundException f) {
 				return "Sorry, no information was found for the artist " + artist + ".";
 			}
@@ -37,7 +38,16 @@ public class ArtistGetter {
 		String s = new String();
 
 		while((s = reader.readLine()) != null) {
-			bio += s;
+			if (s.startsWith("<p><b>"+ fullArtist) || s.startsWith("<p><b>"+ artist)) {
+				use = true;
+			} else if (s.startsWith("</p>")) {
+				use = false;
+			} 
+			
+			if (use == true) {
+				s.replaceAll("\\<.*?>","");
+				bio += s + "\n";
+			}
 		}
 
 		return bio;
