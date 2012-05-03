@@ -59,4 +59,13 @@
         android:layout_toLeftOf="@+id/stop"
         android:text="Lyrics" />
 
+    <Button
+        android:id="@+id/ArtistInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lyrics"
+        android:layout_alignBottom="@+id/lyrics"
+        android:layout_toRightOf="@+id/songName"
+        android:text="Artist Information" />
+
 </RelativeLayout>

@@ -22,6 +22,7 @@
         </activity>
         <activity android:name="Song"></activity>
         <activity android:name="Lyrics"></activity>
+        <activity android:name="Artist"></activity>
     </application>
 
 </manifest>

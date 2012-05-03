@@ -72,6 +72,9 @@ public class Song extends Activity implements OnClickListener {
 		
 		View lyricButton = findViewById(R.id.lyrics);
 		lyricButton.setOnClickListener(this);
+		
+		View artistButton = findViewById(R.id.ArtistInfo);
+		artistButton.setOnClickListener(this);
 
 	}
 
@@ -128,6 +131,12 @@ public class Song extends Activity implements OnClickListener {
 			lyric.putExtra("title", title);
 			lyric.putExtra("artist", artist);
 			startActivity(lyric);
+			break;
+		case R.id.ArtistInfo:
+			Intent artistIntent = new Intent(this, Artist.class);
+			artistIntent.putExtra("artist", artist);
+			startActivity(artistIntent);
+			break;
 		}
 	}
 
