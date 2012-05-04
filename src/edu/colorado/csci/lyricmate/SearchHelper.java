@@ -22,4 +22,19 @@ public class SearchHelper {
 		}
 	}
 
+	public static String findBios(String song, String mediaPath) {
+		MediaMetadataRetriever meta = new MediaMetadataRetriever();
+		meta.setDataSource(mediaPath + "/" + song);
+		
+		String artist = meta.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+		
+		ArtistGetter arGet = new ArtistGetter();
+		try {
+			String bio = arGet.getBio(artist);
+			return bio;
+		} catch (IOException e) {
+			return "Sorry, no bio is available for the artist " + artist;
+		}
+	}
+
 }

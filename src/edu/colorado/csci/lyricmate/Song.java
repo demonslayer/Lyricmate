@@ -146,6 +146,7 @@ public class Song extends Activity implements OnClickListener {
 		case R.id.ArtistInfo:
 			Intent artistIntent = new Intent(this, Artist.class);
 			artistIntent.putExtra("artist", artist);
+			artistIntent.putExtra("bio", this.getIntent().getStringArrayExtra("bios_array")[position]);
 			startActivity(artistIntent);
 			break;
 		}

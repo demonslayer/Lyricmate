@@ -16,12 +16,8 @@ public class Artist extends Activity {
 		String artist = this.getIntent().getExtras().getString("artist");
 		
 		
-		String bio;
-		try {
-			bio = new ArtistGetter().getBio(artist);
-		} catch (IOException e) {
-			bio = "Sorry, no bio information was found for the artist " + artist;
-		}
+		String bio = this.getIntent().getStringExtra("bio");
+
 		TextView bioView = (TextView) findViewById(R.id.artistView);
 		bioView.setText(bio);
 		
