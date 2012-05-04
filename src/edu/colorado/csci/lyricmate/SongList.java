@@ -37,10 +37,21 @@ public class SongList extends ListActivity implements OnClickListener {
 			@Override
 			public void run() {
 				lyricsArray = new String[songs.size()];
-				biosArray = new String[songs.size()];
 
 				for (int i = 0; i < songs.size(); i++) {
 					lyricsArray[i] = SearchHelper.findLyrics(songs.get(i), MEDIA_PATH);
+				}
+			}
+
+		}).start();
+
+		new Thread(new Runner() {
+
+			@Override
+			public void run() {
+				biosArray = new String[songs.size()];
+
+				for (int i = 0; i < songs.size(); i++) {
 					biosArray[i] = SearchHelper.findBios(songs.get(i), MEDIA_PATH);
 				}
 			}
