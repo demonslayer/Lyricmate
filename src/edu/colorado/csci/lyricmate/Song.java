@@ -140,6 +140,7 @@ public class Song extends Activity implements OnClickListener {
 			Intent lyric = new Intent(this, Lyrics.class);
 			lyric.putExtra("title", title);
 			lyric.putExtra("artist", artist);
+			lyric.putExtra("lyrics", this.getIntent().getStringArrayExtra("lyric_array")[position]);
 			startActivity(lyric);
 			break;
 		case R.id.ArtistInfo:

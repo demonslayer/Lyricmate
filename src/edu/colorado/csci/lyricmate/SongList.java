@@ -24,6 +24,8 @@ public class SongList extends ListActivity implements OnClickListener {
 	private List<String> songs = new ArrayList<String>();
 	private Object[] songsObject;
 	private String[] songsArray;
+	private String[] lyricsArray;
+	private String[] biosArray;
 	private int currentPosition = 0;
 	private ArrayAdapter<String> songList;
 
@@ -41,7 +43,7 @@ public class SongList extends ListActivity implements OnClickListener {
 		
 		songsObject = this.getIntent().getStringArrayExtra("song_list");
 
-		if (songsArray == null) {
+		if (songs.size() == 0) {
 			File home = new File(MEDIA_PATH);
 			if (home.listFiles(new Mp3Filter()).length > 0) {
 				for (File file : home.listFiles(new Mp3Filter())) {
@@ -51,9 +53,17 @@ public class SongList extends ListActivity implements OnClickListener {
 				songList = new ArrayAdapter<String>(this, R.layout.song, songs);
 				setListAdapter(songList);
 				songsObject = songs.toArray();
+				
+				lyricsArray = new String[songs.size()];
+				
+				for (int i = 0; i < songs.size(); i++) {
+					lyricsArray[i] = SearchHelper.findLyrics(songs.get(i), MEDIA_PATH);
+				}
 			}
 		} else {
 			songs = Arrays.asList(songsArray(songsObject));
+			lyricsArray = this.getIntent().getStringArrayExtra("lyric_list");
+			biosArray = this.getIntent().getStringArrayExtra("bios_list");
 		}
 	}
 
@@ -76,6 +86,7 @@ public class SongList extends ListActivity implements OnClickListener {
 		i.putExtra("media_path", MEDIA_PATH);
 		i.putExtra("song", song);
 		i.putExtra("song_list", songsArray(songsObject));
+		i.putExtra("lyric_array", lyricsArray);
 		startActivity(i);
 	}
 
@@ -83,9 +94,7 @@ public class SongList extends ListActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.shuffle:
-			System.out.println("songs before: " + songs);
 			Collections.shuffle(songs);
-			System.out.println("songs after: " + songs);
 			songsObject = songs.toArray();
 			songList.notifyDataSetChanged();
 		}
