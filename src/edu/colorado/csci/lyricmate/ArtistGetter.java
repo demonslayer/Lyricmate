@@ -6,13 +6,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.regex.Pattern;
 
 public class ArtistGetter {
 
 	public String getBio(String artist) throws IOException {
 
 		String fullArtist = artist;
-		fullArtist.replace("_", " ");
+		fullArtist.replaceAll("_", " ");
 		artist = artist.replaceAll(" ", "_");
 		artist = artist.replaceAll("\'", "");
 
@@ -40,19 +41,14 @@ public class ArtistGetter {
 
 		while((s = reader.readLine()) != null) {
 
-			if (s.startsWith("<p>")) {
-				System.out.println("LINE: " + s);
-				System.out.println("ARTIST" + artist);
-				System.out.println("MATCHES: " + (s.startsWith("<p><b>"+ fullArtist) || s.startsWith("<p><b>"+ artist)));
-			}
-			if (s.contains("<p><b>"+ fullArtist) || s.contains("<p><b>"+ artist)) {
+			if (s.toLowerCase().contains("<p><b>"+ fullArtist.toLowerCase()) || s.toLowerCase().contains("<p><b>"+ artist.toLowerCase())) {
 				use = true;
-			} else if (s.startsWith("</p>")) {
+			} else if (s.contains("</p>")) {
 				use = false;
 			} 
 
 			if (use == true) {
-				s.replaceAll("<.*>","");
+				s = s.replaceAll("\\<.*?\\>", "");;
 				bio += s + "\n";
 			}
 		}
