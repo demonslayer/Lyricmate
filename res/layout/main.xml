@@ -7,12 +7,13 @@
     <ListView
         android:id="@android:id/android:list"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="388dp"
         android:drawSelectorOnTop="false" />
-    
-    <TextView android:id="@android:id/android:empty"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="@string/no_songs" />
+
+    <Button
+        android:id="@+id/shuffle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Everyday I'm Shufflin'" />
     
 </LinearLayout>
